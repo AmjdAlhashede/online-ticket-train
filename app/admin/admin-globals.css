@@ -10,24 +10,8 @@
   --admin-hover: #f1f5f9;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+/* Removed * and html/body to prevent globals CSS conflict */
 
-html,
-body {
-  background-color: var(--admin-bg);
-  color: var(--admin-text-dark);
-  font-family: inherit;
-  -webkit-font-smoothing: antialiased;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
 
 /* Common Admin Utilities */
 .admin-card {
