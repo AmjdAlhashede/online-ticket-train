@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // We leave this empty because the "wolf" is just the Next.js 15 local dev indicator
 };
 
 export default nextConfig;

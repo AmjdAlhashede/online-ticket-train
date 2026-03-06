@@ -1,7 +1,8 @@
 :root {
   --bg-color: #0d1117;
   --text-color: #ffffff;
-  --primary: 220, 90%, 56%; /* HSL values for energetic blue */
+  --primary: 220, 90%, 56%;
+  /* HSL values for energetic blue */
   --primary-glow: 220, 90%, 56%, 0.4;
   --surface: #161b22;
   --surface-border: rgba(255, 255, 255, 0.1);
@@ -79,4 +80,63 @@ a {
 
 .input-field::placeholder {
   color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive Utilities */
+.responsive-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.responsive-nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.responsive-grid-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 40px;
+}
+
+.responsive-hero-title {
+  font-size: 52px;
+}
+
+.responsive-hero-header {
+  height: 500px;
+}
+
+@media (max-width: 768px) {
+  .responsive-nav {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 20px !important;
+  }
+
+  .responsive-nav-links {
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.95rem;
+  }
+
+  .responsive-grid-sidebar {
+    grid-template-columns: 1fr !important;
+  }
+
+  .responsive-hero-title {
+    font-size: 36px !important;
+  }
+
+  .responsive-hero-header {
+    height: 400px !important;
+  }
+
+  /* Make sure container paddings are smaller on mobile */
+  .mobile-padding {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
 }

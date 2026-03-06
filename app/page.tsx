@@ -1,6 +1,18 @@
+import Link from 'next/link';
 import styles from './page.module.css';
 
+// Mock Data for Stations
+const STATIONS = [
+  { id: '1', name: 'Riyadh Central', city: 'Riyadh' },
+  { id: '2', name: 'Jeddah Gateway', city: 'Jeddah' },
+  { id: '3', name: 'Dammam Station', city: 'Dammam' },
+  { id: '4', name: 'Makkah Transit', city: 'Makkah' },
+  { id: '5', name: 'Madinah Station', city: 'Madinah' }
+];
+
 export default function Home() {
+  const stations = STATIONS;
+
   return (
     <main className={styles.main}>
       {/* Background decoration */}
@@ -10,9 +22,9 @@ export default function Home() {
       <nav className={styles.nav}>
         <div className={styles.logo}>TrackLine</div>
         <div className={styles.navLinks}>
-          <a href="#">Destinations</a>
-          <a href="#">Schedules</a>
-          <button className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.9rem' }}>Sign In</button>
+          <Link href="/">Home</Link>
+          <Link href="/destinations">Destinations</Link>
+          <Link href="/schedules">Schedules</Link>
         </div>
       </nav>
 
@@ -25,34 +37,44 @@ export default function Home() {
           Experience the future of rail travel. Fast, comfortable, and seamless booking tailored just for you.
         </p>
 
-        <div className={`glass-panel ${styles.searchWidget}`}>
+        <form action="/search" method="GET" className={`glass-panel ${styles.searchWidget}`}>
           <div className={styles.searchRow}>
             <div className={styles.inputGroup}>
-              <label>From</label>
-              <input type="text" className="input-field" placeholder="Departure City" />
+              <label htmlFor="from">From</label>
+              <select name="from" id="from" className="input-field" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: 'white' }}>
+                <option value="all" style={{ color: 'black' }}>🌍 All Stations</option>
+                {stations.map(st => (
+                  <option key={st.id} value={st.id} style={{ color: 'black' }}>{st.name} ({st.city})</option>
+                ))}
+              </select>
             </div>
             <div className={styles.swapBtn}>⇄</div>
             <div className={styles.inputGroup}>
-              <label>To</label>
-              <input type="text" className="input-field" placeholder="Arrival City" />
+              <label htmlFor="to">To</label>
+              <select name="to" id="to" className="input-field" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: 'white' }}>
+                <option value="all" style={{ color: 'black' }}>🌍 All Destinations</option>
+                {stations.map(st => (
+                  <option key={st.id} value={st.id} style={{ color: 'black' }}>{st.name} ({st.city})</option>
+                ))}
+              </select>
             </div>
           </div>
           <div className={styles.searchRow}>
             <div className={styles.inputGroup}>
-              <label>Date</label>
-              <input type="date" className="input-field" />
+              <label htmlFor="date">Date (Optional)</label>
+              <input type="date" name="date" id="date" className="input-field" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }} />
             </div>
             <div className={styles.inputGroup}>
-              <label>Passengers</label>
-              <select className="input-field">
-                <option>1 Adult</option>
-                <option>2 Adults</option>
-                <option>Family</option>
+              <label htmlFor="passengers">Passengers</label>
+              <select name="passengers" id="passengers" className="input-field" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: 'white' }}>
+                <option value="1" style={{ color: 'black' }}>1 Adult</option>
+                <option value="2" style={{ color: 'black' }}>2 Adults</option>
+                <option value="family" style={{ color: 'black' }}>Family</option>
               </select>
             </div>
-            <button className={`btn-primary ${styles.searchBtn}`}>Search Trains</button>
+            <button type="submit" className={`btn-primary ${styles.searchBtn}`}>Search Trains</button>
           </div>
-        </div>
+        </form>
       </section>
     </main>
   );
