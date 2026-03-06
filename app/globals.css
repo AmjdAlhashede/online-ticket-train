@@ -140,3 +140,12 @@ a {
     padding-right: 16px !important;
   }
 }
+
+/* Force Hide Next.js Development Build Indicator */
+nextjs-portal,
+#next-route-announcer {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
