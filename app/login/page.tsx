@@ -37,41 +37,40 @@ export default function LoginPage() {
     };
 
     return (
-        <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)', padding: '20px' }}>
-            <div style={{ maxWidth: '450px', width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(20px)', padding: '40px', borderRadius: '30px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)', border: '1px solid rgba(255, 255, 255, 0.5)', margin: 'auto' }}>
-                <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-                    <Link href="/" style={{ fontSize: '28px', fontWeight: '900', color: '#2563eb', textDecoration: 'none', letterSpacing: '-1px' }}>
+        <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f3f4f6', padding: '20px' }}>
+            <div style={{ maxWidth: '400px', width: '100%', backgroundColor: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', border: '1px solid #e5e7eb' }}>
+                <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+                    <Link href="/" style={{ fontSize: '24px', fontWeight: 'bold', color: '#3b82f6', textDecoration: 'none' }}>
                         TrackLine
                     </Link>
-                    <h1 style={{ fontSize: '24px', fontWeight: '800', color: '#0f172a', marginTop: '16px', marginBottom: '8px' }}>Welcome Back</h1>
-                    <p style={{ color: '#64748b', fontSize: '15px', fontWeight: '500' }}>Please sign in to continue with your booking</p>
+                    <h1 style={{ fontSize: '20px', fontWeight: 'bold', color: '#111827', marginTop: '12px' }}>Sign In</h1>
                 </div>
 
                 {error && (
-                    <div style={{ backgroundColor: '#fef2f2', border: '1px solid #fee2e2', color: '#ef4444', padding: '14px', borderRadius: '12px', fontSize: '14px', marginBottom: '24px', fontWeight: '600', textAlign: 'center' }}>
+                    <div style={{ backgroundColor: '#fee2e2', color: '#b91c1c', padding: '12px', borderRadius: '8px', fontSize: '14px', marginBottom: '20px', textAlign: 'center' }}>
                         {error}
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     <div>
-                        <label style={{ display: 'block', fontSize: '14px', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Email Address</label>
+                        <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', color: '#374151', marginBottom: '6px' }}>Email</label>
                         <input
                             type="email"
                             required
-                            style={{ width: '100%', padding: '14px 18px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none', transition: 'all 0.2s', fontSize: '16px' }}
-                            placeholder="your@email.com"
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }}
+                            placeholder="email@example.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
 
                     <div>
-                        <label style={{ display: 'block', fontSize: '14px', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Password</label>
+                        <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', color: '#374151', marginBottom: '6px' }}>Password</label>
                         <input
                             type="password"
                             required
-                            style={{ width: '100%', padding: '14px 18px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none', transition: 'all 0.2s', fontSize: '16px' }}
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }}
                             placeholder="••••••••"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -81,17 +80,17 @@ export default function LoginPage() {
                     <button
                         type="submit"
                         disabled={loading}
-                        style={{ width: '100%', padding: '16px', backgroundColor: '#2563eb', color: 'white', border: 'none', borderRadius: '12px', fontSize: '16px', fontWeight: '700', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 10px 15px -3px rgba(37, 99, 235, 0.3)', marginTop: '8px' }}
+                        style={{ width: '100%', padding: '12px', backgroundColor: '#3b82f6', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}
                     >
-                        {loading ? 'Signing in...' : 'Sign In'}
+                        {loading ? 'Processing...' : 'Login'}
                     </button>
                 </form>
 
-                <div style={{ marginTop: '32px', textAlign: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '24px' }}>
-                    <p style={{ color: '#64748b', fontSize: '15px' }}>
-                        Don't have an account?{' '}
-                        <Link href="/register" style={{ color: '#2563eb', fontWeight: '700', textDecoration: 'none' }}>
-                            Create one now
+                <div style={{ marginTop: '24px', textAlign: 'center', fontSize: '14px' }}>
+                    <p style={{ color: '#6b7280' }}>
+                        No account?{' '}
+                        <Link href="/register" style={{ color: '#3b82f6', textDecoration: 'underline' }}>
+                            Register here
                         </Link>
                     </p>
                 </div>
