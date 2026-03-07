@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './page.module.css';
+import Navbar from '@/components/Navbar';
 
 // Mock Data for Stations
 const STATIONS = [
@@ -19,14 +20,7 @@ export default function Home() {
       <div className={styles.blob}></div>
       <div className={styles.blob2}></div>
 
-      <nav className={styles.nav}>
-        <div className={styles.logo}>TrackLine</div>
-        <div className={styles.navLinks}>
-          <Link href="/">Home</Link>
-          <Link href="/destinations">Destinations</Link>
-          <Link href="/schedules">Schedules</Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <section className={styles.hero}>
         <div className={styles.badge}>Next-Gen Travel</div>

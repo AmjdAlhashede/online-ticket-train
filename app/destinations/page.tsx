@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 
 const DESTINATIONS = [
     {
@@ -43,16 +44,7 @@ const DESTINATIONS = [
 export default function DestinationsPage() {
     return (
         <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}>
-            <nav className="responsive-nav" style={{ padding: '20px 40px', backgroundColor: 'rgba(255, 255, 255, 0.8)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', position: 'sticky', top: 0, zIndex: 50 }}>
-                <Link href="/" style={{ fontSize: '24px', fontWeight: 'bold', color: '#2563eb', textDecoration: 'none' }}>
-                    TrackLine
-                </Link>
-                <div className="responsive-nav-links">
-                    <Link href="/" style={{ color: '#64748b', textDecoration: 'none', fontWeight: 500 }}>Home</Link>
-                    <Link href="/destinations" style={{ color: '#0f172a', textDecoration: 'none', fontWeight: 600 }}>Destinations</Link>
-                    <Link href="/schedules" style={{ color: '#64748b', textDecoration: 'none', fontWeight: 500 }}>Schedules</Link>
-                </div>
-            </nav>
+            <Navbar />
 
             <div className="mobile-padding" style={{
                 width: '100%',

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ScheduleList from '@/app/search/schedule-list';
+import Navbar from '@/components/Navbar';
 
 // Mock Data
 const STATIONS = [
@@ -52,16 +53,7 @@ export default function AllSchedulesPage() {
 
     return (
         <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc' }}>
-            <nav className="responsive-nav" style={{ padding: '20px 40px', backgroundColor: 'white', borderBottom: '1px solid #e2e8f0', position: 'sticky', top: 0, zIndex: 50 }}>
-                <Link href="/" style={{ fontSize: '24px', fontWeight: 'bold', color: '#2563eb', textDecoration: 'none' }}>
-                    TrackLine
-                </Link>
-                <div className="responsive-nav-links">
-                    <Link href="/" style={{ color: '#64748b', textDecoration: 'none', fontWeight: 500 }}>Home</Link>
-                    <Link href="/destinations" style={{ color: '#64748b', textDecoration: 'none', fontWeight: 500 }}>Destinations</Link>
-                    <Link href="/schedules" style={{ color: '#0f172a', textDecoration: 'none', fontWeight: 600 }}>Schedules</Link>
-                </div>
-            </nav>
+            <Navbar />
 
             <div style={{
                 width: '100%',
