@@ -1,0 +1,7 @@
+[
+  { "id": "1", "name": "Riyadh Central", "city": "Riyadh" },
+  { "id": "2", "name": "Jeddah Gateway", "city": "Jeddah" },
+  { "id": "3", "name": "Dammam Station", "city": "Dammam" },
+  { "id": "4", "name": "Makkah Transit", "city": "Makkah" },
+  { "id": "5", "name": "Madinah Station", "city": "Madinah" }
+]

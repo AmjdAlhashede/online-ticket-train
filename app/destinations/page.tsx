@@ -1,47 +1,9 @@
-'use client';
-
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import { getDestinations } from '@/lib/data-service';
 
-const DESTINATIONS = [
-    {
-        id: '1',
-        name: 'Riyadh Central',
-        city: 'Riyadh',
-        image: 'https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?auto=format&fit=crop&q=80&w=800',
-        description: 'The vibrant capital city, pulsating with business and modern attractions.'
-    },
-    {
-        id: '2',
-        name: 'Jeddah Gateway',
-        city: 'Jeddah',
-        image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800',
-        description: 'The beautiful coastal city known as the Gateway to the Two Holy Mosques.'
-    },
-    {
-        id: '3',
-        name: 'Dammam Station',
-        city: 'Dammam',
-        image: 'https://images.unsplash.com/photo-1496568816309-51d7c20e3b21?auto=format&fit=crop&q=80&w=800',
-        description: 'The heart of the Eastern Province, a major seaport and business hub.'
-    },
-    {
-        id: '4',
-        name: 'Makkah Transit',
-        city: 'Makkah',
-        image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&q=80&w=800',
-        description: 'The holiest city in Islam, receiving millions of pilgrims annually.'
-    },
-    {
-        id: '5',
-        name: 'Madinah Station',
-        city: 'Madinah',
-        image: 'https://images.unsplash.com/photo-1519999482648-25049ddd37b1?auto=format&fit=crop&q=80&w=800',
-        description: 'The second holiest city, offering peace and deep historical roots.'
-    }
-];
-
-export default function DestinationsPage() {
+export default async function DestinationsPage() {
+    const destinations = await getDestinations();
     return (
         <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}>
             <Navbar />
@@ -65,7 +27,7 @@ export default function DestinationsPage() {
 
             <div style={{ maxWidth: '1200px', margin: '-40px auto 60px', padding: '0 20px', position: 'relative', zIndex: 10 }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '30px' }}>
-                    {DESTINATIONS.map(dest => (
+                    {destinations.map(dest => (
                         <div key={dest.id} style={{
                             backgroundColor: 'rgba(255, 255, 255, 0.9)',
                             backdropFilter: 'blur(20px)',

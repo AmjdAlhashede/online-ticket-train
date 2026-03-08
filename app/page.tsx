@@ -2,17 +2,10 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import Navbar from '@/components/Navbar';
 
-// Mock Data for Stations
-const STATIONS = [
-  { id: '1', name: 'Riyadh Central', city: 'Riyadh' },
-  { id: '2', name: 'Jeddah Gateway', city: 'Jeddah' },
-  { id: '3', name: 'Dammam Station', city: 'Dammam' },
-  { id: '4', name: 'Makkah Transit', city: 'Makkah' },
-  { id: '5', name: 'Madinah Station', city: 'Madinah' }
-];
+import { getStations } from '@/lib/data-service';
 
-export default function Home() {
-  const stations = STATIONS;
+export default async function Home() {
+  const stations = await getStations();
 
   return (
     <main className={styles.main}>

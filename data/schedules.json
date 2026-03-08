@@ -1,0 +1,77 @@
+[
+    {
+        "id": "sch-1",
+        "price": 120.50,
+        "departureTime": "2026-03-08T08:00:00.000Z",
+        "arrivalTime": "2026-03-08T10:30:00.000Z",
+        "train": {
+            "name": "Express 101",
+            "type": "High Speed",
+            "capacity": 300
+        },
+        "route": {
+            "originStationId": "1",
+            "destinationStationId": "2"
+        }
+    },
+    {
+        "id": "sch-2",
+        "price": 85.00,
+        "departureTime": "2026-03-08T14:15:00.000Z",
+        "arrivalTime": "2026-03-08T17:00:00.000Z",
+        "train": {
+            "name": "Regional 202",
+            "type": "Regional",
+            "capacity": 150
+        },
+        "route": {
+            "originStationId": "1",
+            "destinationStationId": "3"
+        }
+    },
+    {
+        "id": "sch-3",
+        "price": 150.00,
+        "departureTime": "2026-03-08T09:30:00.000Z",
+        "arrivalTime": "2026-03-08T11:45:00.000Z",
+        "train": {
+            "name": "Bullet 303",
+            "type": "High Speed",
+            "capacity": 400
+        },
+        "route": {
+            "originStationId": "4",
+            "destinationStationId": "5"
+        }
+    },
+    {
+        "id": "sch-4",
+        "price": 95.00,
+        "departureTime": "2026-03-08T16:00:00.000Z",
+        "arrivalTime": "2026-03-08T18:10:00.000Z",
+        "train": {
+            "name": "Intercity 404",
+            "type": "Express",
+            "capacity": 250
+        },
+        "route": {
+            "originStationId": "2",
+            "destinationStationId": "5"
+        }
+    },
+    {
+        "id": "sch-5",
+        "price": 110.00,
+        "departureTime": "2026-03-08T19:45:00.000Z",
+        "arrivalTime": "2026-03-08T21:50:00.000Z",
+        "train": {
+            "name": "Night Express",
+            "type": "Express",
+            "capacity": 200
+        },
+        "route": {
+            "originStationId": "3",
+            "destinationStationId": "1"
+        }
+    }
+]
