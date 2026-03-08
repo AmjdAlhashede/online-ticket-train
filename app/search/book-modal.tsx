@@ -14,7 +14,7 @@ export default function BookModal({ schedule, onClose }: { schedule: any, onClos
         if (e) e.preventDefault();
 
         if (!session?.user) {
-            signIn();
+            signIn('credentials', { callbackUrl: window.location.href });
             return;
         }
 

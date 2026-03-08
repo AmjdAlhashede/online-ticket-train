@@ -2,6 +2,9 @@ import type { NextAuthConfig } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 
 export default {
+    pages: {
+        signIn: '/login',
+    },
     providers: [
         Credentials({
             async authorize(credentials) {
