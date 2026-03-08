@@ -27,7 +27,7 @@ export default async function DestinationsPage() {
 
             <div style={{ maxWidth: '1200px', margin: '-40px auto 60px', padding: '0 20px', position: 'relative', zIndex: 10 }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '30px' }}>
-                    {destinations.map(dest => (
+                    {destinations.map((dest: any) => (
                         <div key={dest.id} style={{
                             backgroundColor: 'rgba(255, 255, 255, 0.9)',
                             backdropFilter: 'blur(20px)',
