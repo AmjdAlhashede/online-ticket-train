@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import { getDestinations } from '@/lib/data-service';
 
+export const dynamic = 'force-dynamic';
+
 export default async function DestinationsPage() {
     const destinations = await getDestinations();
     return (
@@ -41,8 +43,6 @@ export default async function DestinationsPage() {
                             height: '100%',
                             cursor: 'pointer'
                         }}
-                            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-8px)'}
-                            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                             className="dest-card">
                             <div style={{
                                 width: '100%',

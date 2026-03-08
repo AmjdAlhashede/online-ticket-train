@@ -3,6 +3,8 @@ import ScheduleList from './schedule-list';
 
 import { getStations, getSchedules } from '@/lib/data-service';
 
+export const dynamic = 'force-dynamic';
+
 export default async function SearchResults({
     searchParams,
 }: {

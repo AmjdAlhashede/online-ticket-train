@@ -3,6 +3,8 @@ import ScheduleList from '@/app/search/schedule-list';
 import Navbar from '@/components/Navbar';
 import { getSchedules } from '@/lib/data-service';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AllSchedulesPage() {
     const schedules = await getSchedules();
 
