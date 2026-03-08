@@ -1,20 +1,30 @@
 'use client';
 
 import { useState } from 'react';
+import { useSession, signIn } from 'next-auth/react';
 import { createPublicBooking } from '@/app/actions/booking';
 
 export default function BookModal({ schedule, onClose }: { schedule: any, onClose: () => void }) {
+    const { data: session, status } = useSession();
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState<{ bookingId: string, seat: string } | null>(null);
     const [error, setError] = useState('');
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>) => {
+        if (e) e.preventDefault();
+
+        if (!session?.user) {
+            signIn();
+            return;
+        }
+
         setLoading(true);
         setError('');
 
-        const formData = new FormData(e.currentTarget);
+        const formData = new FormData();
         formData.append('scheduleId', schedule.id);
+        formData.append('name', session.user.name || 'User');
+        formData.append('email', session.user.email || '');
 
         const result = await createPublicBooking(formData);
 
@@ -26,6 +36,8 @@ export default function BookModal({ schedule, onClose }: { schedule: any, onClos
             setError(result.error || 'Failed to book.');
         }
     };
+
+    if (status === 'loading') return null;
 
     return (
         <div style={{
@@ -70,23 +82,28 @@ export default function BookModal({ schedule, onClose }: { schedule: any, onClos
                             <strong style={{ color: '#0f172a' }}>${schedule.price.toFixed(2)}</strong>
                         </p>
 
-                        {error && <div style={{ color: '#ef4444', backgroundColor: '#fef2f2', padding: '10px', borderRadius: '6px', fontSize: '14px', marginBottom: '15px' }}>{error}</div>}
-
-                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                                <label style={{ fontSize: '14px', fontWeight: '500', color: '#334155' }}>Full Name</label>
-                                <input name="name" required placeholder="John Doe" style={{ padding: '10px 14px', borderRadius: '8px', border: '1px solid #cbd5e1' }} />
+                        {!session ? (
+                            <div style={{ textAlign: 'center', padding: '10px 0' }}>
+                                <p style={{ fontSize: '14px', color: '#475569', marginBottom: '20px' }}>Please sign in to complete your booking.</p>
+                                <button onClick={() => signIn()} className="btn-primary" style={{ width: '100%', padding: '14px' }}>
+                                    Sign In to Book
+                                </button>
                             </div>
+                        ) : (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                                {error && <div style={{ color: '#ef4444', backgroundColor: '#fef2f2', padding: '10px', borderRadius: '6px', fontSize: '14px' }}>{error}</div>}
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                                <label style={{ fontSize: '14px', fontWeight: '500', color: '#334155' }}>Email Address</label>
-                                <input name="email" type="email" required placeholder="john@example.com" style={{ padding: '10px 14px', borderRadius: '8px', border: '1px solid #cbd5e1' }} />
+                                <div style={{ backgroundColor: '#f8fafc', padding: '16px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                                    <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '4px' }}>Booking for:</p>
+                                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#0f172a' }}>{session.user?.name}</p>
+                                    <p style={{ fontSize: '14px', color: '#64748b' }}>{session.user?.email}</p>
+                                </div>
+
+                                <button onClick={() => handleSubmit()} className="btn-primary" style={{ width: '100%', padding: '14px', fontSize: '1.05rem', boxShadow: '0 4px 14px rgba(37, 99, 235, 0.3)' }} disabled={loading}>
+                                    {loading ? 'Confirming...' : 'Complete Booking'}
+                                </button>
                             </div>
-
-                            <button type="submit" className="btn-primary" style={{ width: '100%', padding: '14px', marginTop: '16px', fontSize: '1.05rem', boxShadow: '0 4px 14px rgba(37, 99, 235, 0.3)' }} disabled={loading}>
-                                {loading ? 'Confirming...' : 'Instantly Book Ticket'}
-                            </button>
-                        </form>
+                        )}
                     </>
                 )}
             </div>
