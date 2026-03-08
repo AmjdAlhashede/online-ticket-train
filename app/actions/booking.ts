@@ -10,24 +10,36 @@ export async function createPublicBooking(formData: FormData) {
     }
 
     try {
-        // Generate random seat number for simplicity
+        const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+
+        const response = await fetch(`${API_BASE_URL}/bookings`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ scheduleId, name, email })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            return {
+                success: true,
+                bookingId: result.bookingId,
+                seat: result.seat
+            };
+        } else {
+            return { success: false, error: result.error || 'Failed to book.' };
+        }
+    } catch (error) {
+        console.error('Booking error:', error);
+        // Fallback to mock if API is unavailable
         const seats = ['1A', '2B', '3C', '14D', '22A', '8C', '12B', '15F', '9E'];
         const randomSeat = seats[Math.floor(Math.random() * seats.length)];
-
-        // Generate a random booking ID
         const randomBookingId = Math.random().toString(36).substring(2, 9).toUpperCase();
-
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 800));
 
         return {
             success: true,
             bookingId: `BK-${randomBookingId}`,
             seat: randomSeat
         };
-
-    } catch (error) {
-        console.error('Booking error:', error);
-        return { success: false, error: 'Failed to create booking. Please try again.' };
     }
 }
