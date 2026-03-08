@@ -63,3 +63,15 @@ export const getDestinations = async () => {
         return destinationsData;
     }
 };
+export const getDestination = async (id: string) => {
+    try {
+        console.log(`Fetching destination ${id} from: ${API_BASE_URL}/destinations/${id}`);
+        const response = await fetch(`${API_BASE_URL}/destinations/${id}`, { next: { revalidate: 0 } });
+        if (!response.ok) throw new Error(`Failed to fetch destination: ${response.status}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(`API Error (getDestination ${id}), falling back to JSON:`, error);
+        return destinationsData.find(d => d.id === id);
+    }
+};

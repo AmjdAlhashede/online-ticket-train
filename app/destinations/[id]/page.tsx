@@ -1,77 +1,26 @@
 import Link from 'next/link';
 import ScheduleList from '@/app/search/schedule-list';
+import { getDestination, getSchedules } from '@/lib/data-service';
 
-// Reusing same mock data for consistency
-const DESTINATIONS = [
-    {
-        id: '1',
-        name: 'Riyadh Central',
-        city: 'Riyadh',
-        image: 'https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?auto=format&fit=crop&q=80&w=2000',
-        description: 'The vibrant capital city, pulsating with business and modern attractions.'
-    },
-    {
-        id: '2',
-        name: 'Jeddah Gateway',
-        city: 'Jeddah',
-        image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=2000',
-        description: 'The beautiful coastal city known as the Gateway to the Two Holy Mosques.'
-    },
-    {
-        id: '3',
-        name: 'Dammam Station',
-        city: 'Dammam',
-        image: 'https://images.unsplash.com/photo-1496568816309-51d7c20e3b21?auto=format&fit=crop&q=80&w=2000',
-        description: 'The heart of the Eastern Province, a major seaport and business hub.'
-    },
-    {
-        id: '4',
-        name: 'Makkah Transit',
-        city: 'Makkah',
-        image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&q=80&w=2000',
-        description: 'The holiest city in Islam, receiving millions of pilgrims annually.'
-    },
-    {
-        id: '5',
-        name: 'Madinah Station',
-        city: 'Madinah',
-        image: 'https://images.unsplash.com/photo-1519999482648-25049ddd37b1?auto=format&fit=crop&q=80&w=2000',
-        description: 'The second holiest city, offering peace and deep historical roots.'
-    }
-];
+export const dynamic = 'force-dynamic';
 
 export default async function DestinationDetailsPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const destination = DESTINATIONS.find(d => d.id === id);
+    const destination = await getDestination(id);
 
     if (!destination) {
         return (
-            <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <h2>Destination not found</h2>
+            <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#0f172a', color: 'white' }}>
+                <h2 style={{ fontSize: '32px', fontWeight: '800', marginBottom: '20px' }}>Destination not found</h2>
+                <Link href="/destinations" style={{ color: '#3b82f6', textDecoration: 'none', fontWeight: '600' }}>
+                    &larr; Back to Destinations
+                </Link>
             </div>
         );
     }
 
-    // Mock schedules arriving to this destination
-    const randomOrigin = DESTINATIONS.find(d => d.id !== id) || DESTINATIONS[0];
-    const schedules = [
-        {
-            id: `sch-${id}-1`,
-            price: 120.50,
-            departureTime: new Date(new Date().setHours(8, 0, 0, 0)).toISOString(),
-            arrivalTime: new Date(new Date().setHours(10, 30, 0, 0)).toISOString(),
-            train: { name: 'Express 101', type: 'High Speed', capacity: 300 },
-            route: { originStation: randomOrigin, destinationStation: destination }
-        },
-        {
-            id: `sch-${id}-2`,
-            price: 85.00,
-            departureTime: new Date(new Date().setHours(14, 15, 0, 0)).toISOString(),
-            arrivalTime: new Date(new Date().setHours(17, 0, 0, 0)).toISOString(),
-            train: { name: 'Regional 202', type: 'Regional', capacity: 150 },
-            route: { originStation: randomOrigin, destinationStation: destination }
-        }
-    ];
+    // Fetch actual schedules arriving to this destination
+    const schedules = await getSchedules(undefined, id);
 
     return (
         <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc' }}>
@@ -132,7 +81,13 @@ export default async function DestinationDetailsPage({ params }: { params: Promi
                         <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#0f172a', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                             Popular Schedules to {destination.city}
                         </h2>
-                        <ScheduleList schedules={schedules} />
+                        {schedules.length > 0 ? (
+                            <ScheduleList schedules={schedules} />
+                        ) : (
+                            <div style={{ padding: '40px', backgroundColor: 'white', borderRadius: '20px', textAlign: 'center', border: '1px dashed #e2e8f0' }}>
+                                <p style={{ color: '#64748b' }}>No direct schedules found to this station today.</p>
+                            </div>
+                        )}
                     </div>
                 </div>
 
