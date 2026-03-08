@@ -11,15 +11,21 @@ export default {
 
                 if (!email || !password) return null;
 
-                const user = await prisma.user.findUnique({
-                    where: { email }
-                });
+                try {
+                    const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://online-ticket-train-dashboard.vercel.app/api';
+                    const res = await fetch(`${API_BASE_URL}/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
 
-                if (!user || !user.password) return null;
-
-                const passwordsMatch = await bcrypt.compare(password, user.password);
-
-                if (passwordsMatch) return user;
+                    const data = await res.json();
+                    if (data.success && data.user) {
+                        return data.user;
+                    }
+                } catch (e) {
+                    console.error("Login API error:", e);
+                }
 
                 return null;
             },
