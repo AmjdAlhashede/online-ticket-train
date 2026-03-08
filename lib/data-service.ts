@@ -6,9 +6,12 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://online-ticket-t
 
 export const getStations = async () => {
     try {
-        const response = await fetch(`${API_BASE_URL}/stations`, { next: { revalidate: 3600 } });
-        if (!response.ok) throw new Error('Failed to fetch stations');
-        return await response.json();
+        console.log(`Fetching stations from: ${API_BASE_URL}/stations`);
+        const response = await fetch(`${API_BASE_URL}/stations`, { next: { revalidate: 0 } });
+        if (!response.ok) throw new Error(`Failed to fetch stations: ${response.status}`);
+        const data = await response.json();
+        console.log(`Fetched ${data.length} stations`);
+        return data;
     } catch (error) {
         console.error('API Error (getStations), falling back to JSON:', error);
         return stationsData;
@@ -21,11 +24,11 @@ export const getSchedules = async (from?: string, to?: string) => {
         if (from) url.searchParams.append('from', from);
         if (to) url.searchParams.append('to', to);
 
-        const response = await fetch(url.toString(), { next: { revalidate: 3600 } });
-        if (!response.ok) throw new Error('Failed to fetch schedules');
+        console.log(`Fetching schedules from: ${url.toString()}`);
+        const response = await fetch(url.toString(), { next: { revalidate: 0 } });
+        if (!response.ok) throw new Error(`Failed to fetch schedules: ${response.status}`);
         const data = await response.json();
-
-        // The API returns fully populated objects, so we just return them
+        console.log(`Fetched ${data.length} schedules`);
         return data;
     } catch (error) {
         console.error('API Error (getSchedules), falling back to JSON:', error);
@@ -49,9 +52,12 @@ export const getSchedules = async (from?: string, to?: string) => {
 
 export const getDestinations = async () => {
     try {
-        const response = await fetch(`${API_BASE_URL}/destinations`, { next: { revalidate: 3600 } });
-        if (!response.ok) throw new Error('Failed to fetch destinations');
-        return await response.json();
+        console.log(`Fetching destinations from: ${API_BASE_URL}/destinations`);
+        const response = await fetch(`${API_BASE_URL}/destinations`, { next: { revalidate: 0 } });
+        if (!response.ok) throw new Error(`Failed to fetch destinations: ${response.status}`);
+        const data = await response.json();
+        console.log(`Fetched ${data.length} destinations`);
+        return data;
     } catch (error) {
         console.error('API Error (getDestinations), falling back to JSON:', error);
         return destinationsData;
