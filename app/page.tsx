@@ -30,7 +30,7 @@ export default async function Home() {
               <label htmlFor="from">From</label>
               <select name="from" id="from" className="input-field" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: 'white' }}>
                 <option value="all" style={{ color: 'black' }}>🌍 All Stations</option>
-                {stations.map(st => (
+                {stations.map((st: any) => (
                   <option key={st.id} value={st.id} style={{ color: 'black' }}>{st.name} ({st.city})</option>
                 ))}
               </select>
@@ -40,7 +40,7 @@ export default async function Home() {
               <label htmlFor="to">To</label>
               <select name="to" id="to" className="input-field" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: 'white' }}>
                 <option value="all" style={{ color: 'black' }}>🌍 All Destinations</option>
-                {stations.map(st => (
+                {stations.map((st: any) => (
                   <option key={st.id} value={st.id} style={{ color: 'black' }}>{st.name} ({st.city})</option>
                 ))}
               </select>

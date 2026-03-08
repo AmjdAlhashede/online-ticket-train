@@ -24,8 +24,8 @@ export default async function SearchResults({
         // ... (rest of search validation)
     }
 
-    const origin = from === 'all' ? { id: 'all', name: 'All Stations', city: 'Any City' } : stations.find(s => s.id === from);
-    const destination = to === 'all' ? { id: 'all', name: 'All Destinations', city: 'Any City' } : stations.find(s => s.id === to);
+    const origin = from === 'all' ? { id: 'all', name: 'All Stations', city: 'Any City' } : stations.find((s: any) => s.id === from);
+    const destination = to === 'all' ? { id: 'all', name: 'All Destinations', city: 'Any City' } : stations.find((s: any) => s.id === to);
 
     if (!origin || !destination) return <div>Missing stations</div>
 
