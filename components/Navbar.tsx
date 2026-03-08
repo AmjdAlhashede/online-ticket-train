@@ -32,6 +32,7 @@ export default function Navbar() {
                 gap: '30px'
             }}>
                 <div style={{ display: 'flex', gap: '20px' }}>
+                    <Link href="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontWeight: '600', fontSize: '15px' }}>Home</Link>
                     <Link href="/destinations" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontWeight: '600', fontSize: '15px' }}>Destinations</Link>
                     <Link href="/schedules" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontWeight: '600', fontSize: '15px' }}>Schedules</Link>
                 </div>
