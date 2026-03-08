@@ -2,7 +2,7 @@ import stationsData from '@/data/stations.json';
 import schedulesData from '@/data/schedules.json';
 import destinationsData from '@/data/destinations.json';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://online-ticket-train-dashboard.vercel.app/api';
 
 export const getStations = async () => {
     try {

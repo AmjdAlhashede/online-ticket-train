@@ -18,7 +18,7 @@ export default function RegisterPage() {
         setError('');
 
         try {
-            const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+            const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://online-ticket-train-dashboard.vercel.app/api';
             const res = await fetch(`${API_BASE_URL}/register`, {
                 method: 'POST',
                 headers: {
